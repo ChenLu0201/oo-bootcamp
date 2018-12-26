@@ -64,4 +64,26 @@ class ParkingBoyTest {
         assertThrows(NoSpaceException.class, () -> parkingBoy.parkCar(new Car()));
     }
 
+    @Test
+    void shouldGetMyCarWhenPickCarGivenSingleParkingLot() {
+        ParkingLot parkingLot = new ParkingLot(2);
+        ParkingBoy parkingBoy = new ParkingBoy(newArrayList(parkingLot));
+        Car myCar = new Car();
+        Ticket myTicket = parkingBoy.parkCar(myCar);
+
+        assertSame(myCar, parkingBoy.pickCar(myTicket));
+    }
+
+    @Test
+    void shouldGetMyCarWhenPickCarGivenTwoParkingLots() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        firstParkingLot.parkCar(new Car());
+        ParkingLot secondParkingLot = new ParkingLot(2);
+        ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+        Car myCar = new Car();
+        Ticket myTicket = parkingBoy.parkCar(myCar);
+
+        assertSame(myCar, parkingBoy.pickCar(myTicket));
+    }
+
 }

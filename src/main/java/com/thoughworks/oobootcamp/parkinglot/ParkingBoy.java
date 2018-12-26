@@ -19,4 +19,13 @@ public class ParkingBoy {
         }
         throw new NoSpaceException("Parking lots are full");
     }
+
+    public Car pickCar(Ticket ticket) {
+        for (ParkingLot parkingLot : parkingLots) {
+            if (parkingLot.isTicketAvailable(ticket)) {
+                return parkingLot.pickCar(ticket);
+            }
+        }
+        return null;
+    }
 }
