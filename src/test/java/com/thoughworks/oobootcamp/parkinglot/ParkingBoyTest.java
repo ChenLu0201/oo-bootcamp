@@ -1,6 +1,5 @@
 package com.thoughworks.oobootcamp.parkinglot;
 
-import com.google.common.collect.Lists;
 import org.junit.jupiter.api.Test;
 
 import static com.google.common.collect.Lists.newArrayList;
