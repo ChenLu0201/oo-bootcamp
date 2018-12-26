@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParkingBoyTest {
@@ -31,9 +32,23 @@ class ParkingBoyTest {
         ParkingLot firstParkingLot = new ParkingLot(2);
         ParkingLot secondParkingLot = new ParkingLot(2);
         ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
-        Ticket myTicket = parkingBoy.parkCar(new Car());
+        Car myCar = new Car();
+        Ticket myTicket = parkingBoy.parkCar(myCar);
         assertNotNull(myTicket);
-        assertNotNull(firstParkingLot.pickCar(myTicket));
+        assertSame(myCar, firstParkingLot.pickCar(myTicket));
+    }
+
+    @Test
+    void shouldReturnTicketWhenParkCarGivenTwoParkingLotsWithOneIsFull() {
+        ParkingLot firstParkingLot = new ParkingLot(2);
+        firstParkingLot.parkCar(new Car());
+        firstParkingLot.parkCar(new Car());
+        ParkingLot secondParkingLot = new ParkingLot(2);
+        ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+        Car myCar = new Car();
+        Ticket myTicket = parkingBoy.parkCar(myCar);
+        assertNotNull(myTicket);
+        assertSame(myCar, secondParkingLot.pickCar(myTicket));
     }
 
 }
