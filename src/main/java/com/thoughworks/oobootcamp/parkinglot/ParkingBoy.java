@@ -17,7 +17,7 @@ public class ParkingBoy {
                 return parkingLot.parkCar(car);
             }
         }
-        throw new NoSpaceException("Parking lots are full");
+        throw new NoSpaceException();
     }
 
     public Car pickCar(Ticket ticket) {
@@ -26,6 +26,6 @@ public class ParkingBoy {
                 return parkingLot.pickCar(ticket);
             }
         }
-        return null;
+        throw new InvalidTicketException();
     }
 }

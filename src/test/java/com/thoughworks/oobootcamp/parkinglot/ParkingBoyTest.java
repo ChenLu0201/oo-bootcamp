@@ -86,4 +86,16 @@ class ParkingBoyTest {
         assertSame(myCar, parkingBoy.pickCar(myTicket));
     }
 
+    @Test
+    void shouldThrowExcpetionWhenPickCarGivenInvalidTicket() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        firstParkingLot.parkCar(new Car());
+        ParkingLot secondParkingLot = new ParkingLot(2);
+        ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+        Car myCar = new Car();
+        parkingBoy.parkCar(myCar);
+
+        assertThrows(InvalidTicketException.class, () -> parkingBoy.pickCar(new Ticket()));
+    }
+
 }
