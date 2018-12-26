@@ -51,4 +51,17 @@ class ParkingBoyTest {
         assertSame(myCar, secondParkingLot.pickCar(myTicket));
     }
 
+    @Test
+    void shouldThrowExceptionWhenParkCarGivenTwoParkingLotsBothFull() {
+        ParkingLot firstParkingLot = new ParkingLot(2);
+        firstParkingLot.parkCar(new Car());
+        firstParkingLot.parkCar(new Car());
+        ParkingLot secondParkingLot = new ParkingLot(2);
+        secondParkingLot.parkCar(new Car());
+        secondParkingLot.parkCar(new Car());
+        ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+
+        assertThrows(NoSpaceException.class, () -> parkingBoy.parkCar(new Car()));
+    }
+
 }
