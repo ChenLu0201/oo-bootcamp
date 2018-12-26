@@ -54,11 +54,4 @@ class ParkingLotTest {
     assertNotNull(parkingLot.parkCar(new Car()));
   }
 
-  @Test
-  void shouldReturnTicketWhenParkingBoyParkCarGivenSingleParkingLotHasRemainingSpace() {
-    ParkingLot parkingLot = new ParkingLot(2);
-    ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-
-    assertNotNull(parkingBoy.parkCar(new Car()));
-  }
 }

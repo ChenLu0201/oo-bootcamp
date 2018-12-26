@@ -1,14 +1,22 @@
 package com.thoughworks.oobootcamp.parkinglot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ParkingBoy {
 
-  private ParkingLot parkingLot;
+    private final List<ParkingLot> parkingLots;
 
-  public ParkingBoy(ParkingLot parkingLot) {
-    this.parkingLot = parkingLot;
-  }
+    public ParkingBoy(ArrayList<ParkingLot> parkingLots) {
+        this.parkingLots = parkingLots;
+    }
 
-  public Ticket parkCar(Car car) {
-    return parkingLot.parkCar(car);
-  }
+    public Ticket parkCar(Car car) {
+        for (ParkingLot parkingLot : parkingLots) {
+            if (parkingLot.hasSpace()) {
+                return parkingLot.parkCar(car);
+            }
+        }
+        throw new NoSpaceException("Parking lots are full");
+    }
 }
