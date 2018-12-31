@@ -2,6 +2,7 @@ package com.thoughworks.oobootcamp.parkinglot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ParkingBoy {
 
@@ -12,19 +13,17 @@ public class ParkingBoy {
     }
 
     public Ticket parkCar(Car car) {
-        for (ParkingLot parkingLot : parkingLots) {
-            if (parkingLot.hasSpace()) {
-                return parkingLot.parkCar(car);
-            }
+        Optional<ParkingLot> optionalLot = parkingLots.stream().filter((parkingLot) -> parkingLot.hasSpace()).findFirst();
+        if (optionalLot.isPresent()) {
+            return optionalLot.get().parkCar(car);
         }
         throw new NoSpaceException();
     }
 
     public Car pickCar(Ticket ticket) {
-        for (ParkingLot parkingLot : parkingLots) {
-            if (parkingLot.isTicketAvailable(ticket)) {
-                return parkingLot.pickCar(ticket);
-            }
+        Optional<ParkingLot> optionalLot = parkingLots.stream().filter((parkingLot) -> parkingLot.isTicketAvailable(ticket)).findAny();
+        if (optionalLot.isPresent()) {
+            return optionalLot.get().pickCar(ticket);
         }
         throw new InvalidTicketException();
     }

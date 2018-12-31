@@ -30,12 +30,6 @@ public class ParkingLot {
         return car;
     }
 
-    public static void main(String[] args) {
-        ParkingLot parkingLot = new ParkingLot(2);
-        parkingLot.parkCar(new Car());
-        parkingLot.pickCar(null);
-    }
-
     public boolean hasSpace() {
         return space > cars.size();
     }
