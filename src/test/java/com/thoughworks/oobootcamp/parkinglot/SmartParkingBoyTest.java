@@ -19,4 +19,16 @@ public class SmartParkingBoyTest {
         assertNotNull(myTicket);
         assertSame(myCar, firstLot.pickCar(myTicket));
     }
+
+    @Test
+    void should_park_car_into_A_when_park_car_given_two_parking_lots_and_have_same_space() {
+        ParkingLot firstLot = new ParkingLot(3);
+        ParkingLot secondLot = new ParkingLot(3);
+        SmartParkingBoy parkingBoy = new SmartParkingBoy(newArrayList(firstLot, secondLot));
+        Car myCar = new Car();
+        Ticket myTicket = parkingBoy.parkCar(myCar);
+
+        assertNotNull(myTicket);
+        assertSame(myCar, firstLot.pickCar(myTicket));
+    }
 }
