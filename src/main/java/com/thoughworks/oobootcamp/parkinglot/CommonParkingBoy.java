@@ -16,12 +16,4 @@ public class CommonParkingBoy extends ParkingBoy {
         }
         throw new NoSpaceException();
     }
-
-    public Car pickCar(Ticket ticket) {
-        Optional<ParkingLot> optionalLot = parkingLots.stream().filter((parkingLot) -> parkingLot.isTicketAvailable(ticket)).findAny();
-        if (optionalLot.isPresent()) {
-            return optionalLot.get().pickCar(ticket);
-        }
-        throw new InvalidTicketException();
-    }
 }

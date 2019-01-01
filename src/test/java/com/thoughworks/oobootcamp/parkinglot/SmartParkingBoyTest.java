@@ -57,4 +57,15 @@ public class SmartParkingBoyTest {
 
         assertThrows(NoSpaceException.class, () -> parkingBoy.parkCar(new Car()));
     }
+
+    @Test
+    void should_return_my_car_when_pick_car_given_available_ticket() {
+        ParkingLot firstLot = new ParkingLot(3);
+        ParkingLot secondLot = new ParkingLot(4);
+        ParkingBoy parkingBoy = new SmartParkingBoy(newArrayList(firstLot, secondLot));
+        Car myCar = new Car();
+        Ticket myTicket = parkingBoy.parkCar(myCar);
+
+        assertSame(myCar, parkingBoy.pickCar(myTicket));
+    }
 }
