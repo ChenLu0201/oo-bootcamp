@@ -7,14 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ParkingBoyTest {
+class CommonParkingBoyTest {
 
     @Test
     void shouldReturnTicketWhenParkCarGivenSingleParkingLotHasRemainingSpace() {
         ParkingLot parkingLot = new ParkingLot(2);
-        ParkingBoy parkingBoy = new ParkingBoy(newArrayList(parkingLot));
+        CommonParkingBoy commonParkingBoy = new CommonParkingBoy(newArrayList(parkingLot));
 
-        assertNotNull(parkingBoy.parkCar(new Car()));
+        assertNotNull(commonParkingBoy.parkCar(new Car()));
     }
 
     @Test
@@ -22,18 +22,18 @@ class ParkingBoyTest {
         ParkingLot parkingLot = new ParkingLot(2);
         parkingLot.parkCar(new Car());
         parkingLot.parkCar(new Car());
-        ParkingBoy parkingBoy = new ParkingBoy(newArrayList(parkingLot));
+        CommonParkingBoy commonParkingBoy = new CommonParkingBoy(newArrayList(parkingLot));
 
-        assertThrows(NoSpaceException.class, () -> parkingBoy.parkCar(new Car()));
+        assertThrows(NoSpaceException.class, () -> commonParkingBoy.parkCar(new Car()));
     }
 
     @Test
     void shouldReturnTicketWhenParkCarGivenTwoParkingLotsBothHasRemainingSpace() {
         ParkingLot firstParkingLot = new ParkingLot(2);
         ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+        CommonParkingBoy commonParkingBoy = new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
         Car myCar = new Car();
-        Ticket myTicket = parkingBoy.parkCar(myCar);
+        Ticket myTicket = commonParkingBoy.parkCar(myCar);
         assertNotNull(myTicket);
         assertSame(myCar, firstParkingLot.pickCar(myTicket));
     }
@@ -44,9 +44,9 @@ class ParkingBoyTest {
         firstParkingLot.parkCar(new Car());
         firstParkingLot.parkCar(new Car());
         ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+        CommonParkingBoy commonParkingBoy = new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
         Car myCar = new Car();
-        Ticket myTicket = parkingBoy.parkCar(myCar);
+        Ticket myTicket = commonParkingBoy.parkCar(myCar);
         assertNotNull(myTicket);
         assertSame(myCar, secondParkingLot.pickCar(myTicket));
     }
@@ -59,19 +59,19 @@ class ParkingBoyTest {
         ParkingLot secondParkingLot = new ParkingLot(2);
         secondParkingLot.parkCar(new Car());
         secondParkingLot.parkCar(new Car());
-        ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+        CommonParkingBoy commonParkingBoy = new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
 
-        assertThrows(NoSpaceException.class, () -> parkingBoy.parkCar(new Car()));
+        assertThrows(NoSpaceException.class, () -> commonParkingBoy.parkCar(new Car()));
     }
 
     @Test
     void shouldGetMyCarWhenPickCarGivenSingleParkingLot() {
         ParkingLot parkingLot = new ParkingLot(2);
-        ParkingBoy parkingBoy = new ParkingBoy(newArrayList(parkingLot));
+        CommonParkingBoy commonParkingBoy = new CommonParkingBoy(newArrayList(parkingLot));
         Car myCar = new Car();
-        Ticket myTicket = parkingBoy.parkCar(myCar);
+        Ticket myTicket = commonParkingBoy.parkCar(myCar);
 
-        assertSame(myCar, parkingBoy.pickCar(myTicket));
+        assertSame(myCar, commonParkingBoy.pickCar(myTicket));
     }
 
     @Test
@@ -79,11 +79,11 @@ class ParkingBoyTest {
         ParkingLot firstParkingLot = new ParkingLot(1);
         firstParkingLot.parkCar(new Car());
         ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+        CommonParkingBoy commonParkingBoy = new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
         Car myCar = new Car();
-        Ticket myTicket = parkingBoy.parkCar(myCar);
+        Ticket myTicket = commonParkingBoy.parkCar(myCar);
 
-        assertSame(myCar, parkingBoy.pickCar(myTicket));
+        assertSame(myCar, commonParkingBoy.pickCar(myTicket));
     }
 
     @Test
@@ -91,11 +91,11 @@ class ParkingBoyTest {
         ParkingLot firstParkingLot = new ParkingLot(1);
         firstParkingLot.parkCar(new Car());
         ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+        CommonParkingBoy commonParkingBoy = new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
         Car myCar = new Car();
-        parkingBoy.parkCar(myCar);
+        commonParkingBoy.parkCar(myCar);
 
-        assertThrows(InvalidTicketException.class, () -> parkingBoy.pickCar(new Ticket()));
+        assertThrows(InvalidTicketException.class, () -> commonParkingBoy.pickCar(new Ticket()));
     }
 
 }

@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ParkingBoy {
+public class CommonParkingBoy {
 
     private final List<ParkingLot> parkingLots;
 
-    public ParkingBoy(ArrayList<ParkingLot> parkingLots) {
+    public CommonParkingBoy(ArrayList<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
     }
 
     public Ticket parkCar(Car car) {
-        Optional<ParkingLot> optionalLot = parkingLots.stream().filter((parkingLot) -> parkingLot.hasSpace()).findFirst();
+        Optional<ParkingLot> optionalLot = parkingLots.stream().filter(ParkingLot::hasSpace).findFirst();
         if (optionalLot.isPresent()) {
             return optionalLot.get().parkCar(car);
         }
