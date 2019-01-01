@@ -1,0 +1,22 @@
+package com.thoughworks.oobootcamp.parkinglot;
+
+import org.junit.jupiter.api.Test;
+
+import static com.google.common.collect.Lists.newArrayList;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+
+public class SmartParkingBoyTest {
+
+    @Test
+    void should_park_car_into_A_when_park_car_given_two_parking_lots_and_A_has_more_space() {
+        ParkingLot firstLot = new ParkingLot(4);
+        ParkingLot secondLot = new ParkingLot(3);
+        SmartParkingBoy parkingBoy = new SmartParkingBoy(newArrayList(firstLot, secondLot));
+        Car myCar = new Car();
+        Ticket myTicket = parkingBoy.parkCar(myCar);
+
+        assertNotNull(myTicket);
+        assertSame(myCar, firstLot.pickCar(myTicket));
+    }
+}
