@@ -37,4 +37,8 @@ public class ParkingLot {
     public boolean isTicketAvailable(Ticket ticket) {
         return cars.containsKey(ticket);
     }
+
+    public int getRemainingSpace() {
+        return space - cars.size();
+    }
 }
