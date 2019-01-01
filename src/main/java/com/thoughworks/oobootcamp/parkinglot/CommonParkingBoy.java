@@ -1,15 +1,12 @@
 package com.thoughworks.oobootcamp.parkinglot;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-public class CommonParkingBoy {
-
-    private final List<ParkingLot> parkingLots;
+public class CommonParkingBoy extends ParkingBoy {
 
     public CommonParkingBoy(ArrayList<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
+        super(parkingLots);
     }
 
     public Ticket parkCar(Car car) {
