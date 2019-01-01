@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SmartParkingBoyTest {
 
@@ -42,5 +43,18 @@ public class SmartParkingBoyTest {
 
         assertNotNull(myTicket);
         assertSame(myCar, secondLot.pickCar(myTicket));
+    }
+
+    @Test
+    void should_throw_expception_when_park_car_given_no_space_left() {
+        ParkingLot firstLot = new ParkingLot(2);
+        firstLot.parkCar(new Car());
+        firstLot.parkCar(new Car());
+        ParkingLot secondLot = new ParkingLot(2);
+        secondLot.parkCar(new Car());
+        secondLot.parkCar(new Car());
+        ParkingBoy parkingBoy = new SmartParkingBoy(newArrayList(firstLot, secondLot));
+
+        assertThrows(NoSpaceException.class, () -> parkingBoy.parkCar(new Car()));
     }
 }
