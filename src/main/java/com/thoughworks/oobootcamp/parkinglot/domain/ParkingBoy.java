@@ -1,4 +1,6 @@
-package com.thoughworks.oobootcamp.parkinglot;
+package com.thoughworks.oobootcamp.parkinglot.domain;
+
+import com.thoughworks.oobootcamp.parkinglot.excpetion.InvalidTicketException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,7 @@ public abstract class ParkingBoy {
         this.parkingLots = parkingLots;
     }
 
-    abstract Ticket parkCar(Car car);
+    public abstract Ticket parkCar(Car car);
 
     public Car pickCar(Ticket ticket) {
         Optional<ParkingLot> optionalLot = parkingLots.stream().filter((parkingLot) -> parkingLot.isTicketAvailable(ticket)).findAny();

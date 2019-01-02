@@ -1,4 +1,4 @@
-package com.thoughworks.oobootcamp.parkinglot;
+package com.thoughworks.oobootcamp.parkinglot.domain;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -10,8 +10,8 @@ public class SmartParkingBoy extends ParkingBoy {
         super(parkingLots);
     }
 
-    @Override
-    Ticket parkCar(Car car) {
+
+    public Ticket parkCar(Car car) {
         OptionalInt max = parkingLots.stream().mapToInt(ParkingLot::getRemainingSpace).max();
         Optional<ParkingLot> availableLot = parkingLots.stream().filter(parkingLot -> max.getAsInt() == parkingLot.getRemainingSpace()).findFirst();
         if (availableLot.isPresent()) {

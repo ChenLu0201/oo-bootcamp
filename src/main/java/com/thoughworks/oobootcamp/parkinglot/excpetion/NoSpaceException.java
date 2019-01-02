@@ -1,4 +1,4 @@
-package com.thoughworks.oobootcamp.parkinglot;
+package com.thoughworks.oobootcamp.parkinglot.excpetion;
 
 public class NoSpaceException extends RuntimeException {
 

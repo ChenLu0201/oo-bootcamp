@@ -1,4 +1,7 @@
-package com.thoughworks.oobootcamp.parkinglot;
+package com.thoughworks.oobootcamp.parkinglot.domain;
+
+import com.thoughworks.oobootcamp.parkinglot.excpetion.InvalidTicketException;
+import com.thoughworks.oobootcamp.parkinglot.excpetion.NoSpaceException;
 
 import java.util.HashMap;
 import java.util.Map;

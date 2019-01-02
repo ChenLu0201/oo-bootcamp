@@ -1,5 +1,10 @@
 package com.thoughworks.oobootcamp.parkinglot;
 
+import com.thoughworks.oobootcamp.parkinglot.domain.Car;
+import com.thoughworks.oobootcamp.parkinglot.excpetion.InvalidTicketException;
+import com.thoughworks.oobootcamp.parkinglot.excpetion.NoSpaceException;
+import com.thoughworks.oobootcamp.parkinglot.domain.ParkingLot;
+import com.thoughworks.oobootcamp.parkinglot.domain.Ticket;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;

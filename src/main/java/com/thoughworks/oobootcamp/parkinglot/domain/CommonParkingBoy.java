@@ -1,4 +1,6 @@
-package com.thoughworks.oobootcamp.parkinglot;
+package com.thoughworks.oobootcamp.parkinglot.domain;
+
+import com.thoughworks.oobootcamp.parkinglot.excpetion.NoSpaceException;
 
 import java.util.ArrayList;
 import java.util.Optional;
