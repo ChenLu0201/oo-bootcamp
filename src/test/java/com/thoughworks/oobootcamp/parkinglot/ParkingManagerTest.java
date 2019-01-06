@@ -2,7 +2,7 @@ package com.thoughworks.oobootcamp.parkinglot;
 
 import com.thoughworks.oobootcamp.parkinglot.domain.Car;
 import com.thoughworks.oobootcamp.parkinglot.domain.CommonParkingBoy;
-import com.thoughworks.oobootcamp.parkinglot.domain.ParkingBoy;
+import com.thoughworks.oobootcamp.parkinglot.domain.ParkAndPickable;
 import com.thoughworks.oobootcamp.parkinglot.domain.ParkingLot;
 import com.thoughworks.oobootcamp.parkinglot.domain.ParkingManager;
 import com.thoughworks.oobootcamp.parkinglot.domain.Ticket;
@@ -19,7 +19,9 @@ public class ParkingManagerTest {
     void should_return_ticket_when_park_car_given_manager_only_has_parking_lots() {
         ParkingLot firstParkingLot = new ParkingLot(2);
         ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkingManager parkingManager = new ParkingManager(newArrayList(firstParkingLot, secondParkingLot));
+        ParkingManager parkingManager = new ParkingManager();
+        parkingManager.registerPickAndParkable(firstParkingLot);
+        parkingManager.registerPickAndParkable(secondParkingLot);
 
         Car myCar = new Car();
         Ticket ticket = parkingManager.parkCar(myCar);
@@ -35,19 +37,22 @@ public class ParkingManagerTest {
         ParkingLot secondParkingLot = new ParkingLot(2);
         secondParkingLot.parkCar(new Car());
         secondParkingLot.parkCar(new Car());
-        ParkingManager parkingManager = new ParkingManager(newArrayList(firstParkingLot, secondParkingLot));
+        ParkingManager parkingManager = new ParkingManager();
+        parkingManager.registerPickAndParkable(firstParkingLot);
+        parkingManager.registerPickAndParkable(secondParkingLot);
 
         assertThrows(NoSpaceException.class, () -> parkingManager.parkCar(new Car()));
     }
 
     @Test
     void should_return_ticket_when_park_car_given_manager_has_one_parking_boy_and_parking_lots() {
-        ParkingLot parkingLot = new ParkingLot(2);
         ParkingLot firstParkingLot = new ParkingLot(2);
         ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkingManager parkingManager = new ParkingManager(newArrayList(parkingLot));
-        ParkingBoy parkingBoy= new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
-        parkingManager.registerParkingBoy(parkingBoy);
+        ParkingManager parkingManager = new ParkingManager();
+        ParkAndPickable parkingBoy= new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+        ParkingLot parkingLot = new ParkingLot(2);
+        parkingManager.registerPickAndParkable(parkingBoy);
+        parkingManager.registerPickAndParkable(parkingLot);
         Car myCar = new Car();
         Ticket ticket = parkingManager.parkCar(myCar);
         assertNotNull(ticket);

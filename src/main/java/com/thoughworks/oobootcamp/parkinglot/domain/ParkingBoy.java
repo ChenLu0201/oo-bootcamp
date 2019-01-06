@@ -5,15 +5,14 @@ import com.thoughworks.oobootcamp.parkinglot.excpetion.InvalidTicketException;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class ParkingBoy implements CheckSpace {
+public abstract class ParkingBoy implements ParkAndPickable {
     protected final List<ParkingLot> parkingLots;
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
     }
 
-    public abstract Ticket parkCar(Car car);
-
+    @Override
     public Car pickCar(Ticket ticket) {
         Optional<ParkingLot> optionalLot = parkingLots.stream().filter((parkingLot) -> parkingLot.isTicketAvailable(ticket)).findAny();
         if (optionalLot.isPresent()) {
