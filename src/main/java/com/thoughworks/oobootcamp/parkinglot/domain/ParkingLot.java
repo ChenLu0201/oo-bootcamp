@@ -6,7 +6,7 @@ import com.thoughworks.oobootcamp.parkinglot.excpetion.NoSpaceException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ParkingLot {
+public class ParkingLot implements CheckSpace {
 
     private final int space;
 

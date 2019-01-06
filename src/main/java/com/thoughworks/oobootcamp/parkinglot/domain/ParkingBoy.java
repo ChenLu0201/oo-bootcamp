@@ -5,7 +5,7 @@ import com.thoughworks.oobootcamp.parkinglot.excpetion.InvalidTicketException;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class ParkingBoy {
+public abstract class ParkingBoy implements CheckSpace {
     protected final List<ParkingLot> parkingLots;
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
@@ -20,5 +20,10 @@ public abstract class ParkingBoy {
             return optionalLot.get().pickCar(ticket);
         }
         throw new InvalidTicketException();
+    }
+
+    @Override
+    public boolean hasSpace() {
+        return parkingLots.stream().anyMatch(ParkingLot::hasSpace);
     }
 }

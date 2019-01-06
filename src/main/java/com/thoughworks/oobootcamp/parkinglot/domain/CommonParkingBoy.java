@@ -18,4 +18,5 @@ public class CommonParkingBoy extends ParkingBoy {
         }
         throw new NoSpaceException();
     }
+
 }
