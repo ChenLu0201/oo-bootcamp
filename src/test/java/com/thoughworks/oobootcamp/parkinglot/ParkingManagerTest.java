@@ -99,4 +99,28 @@ public class ParkingManagerTest {
         assertNotNull(ticket);
         assertSame(myCar, thirdParkingLot.pickCar(ticket));
     }
+
+    @Test
+    void should_park_to_parking_lot_when_park_car_given_parking_lot_is_registered_into_parking_manager() {
+        ParkingManager parkingManager = new ParkingManager();
+
+        ParkingLot parkingLot = new ParkingLot(2);
+        parkingManager.registerPickAndParkable(parkingLot);
+
+        ParkingLot firstParkingLot = new ParkingLot(2);
+        ParkingLot secondParkingLot = new ParkingLot(2);
+        ParkAndPickable parkingBoyA= new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+
+        ParkingLot thirdParkingLot = new ParkingLot(2);
+        ParkingLot fourthParkingLot = new ParkingLot(2);
+        ParkAndPickable parkingBoyB= new SmartParkingBoy(newArrayList(thirdParkingLot, fourthParkingLot));
+
+        parkingManager.registerPickAndParkable(parkingBoyB);
+        parkingManager.registerPickAndParkable(parkingBoyA);
+
+        Car myCar = new Car();
+        Ticket ticket = parkingManager.parkCar(myCar);
+        assertNotNull(ticket);
+        assertSame(myCar, parkingLot.pickCar(ticket));
+    }
 }
