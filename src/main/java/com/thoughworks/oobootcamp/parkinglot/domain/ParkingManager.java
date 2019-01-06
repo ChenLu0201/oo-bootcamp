@@ -1,5 +1,6 @@
 package com.thoughworks.oobootcamp.parkinglot.domain;
 
+import com.thoughworks.oobootcamp.parkinglot.helper.ParkAndPickableSorter;
 import com.thoughworks.oobootcamp.parkinglot.excpetion.NoSpaceException;
 
 import java.util.ArrayList;
@@ -9,6 +10,13 @@ import java.util.Optional;
 public class ParkingManager {
 
     private final List<ParkAndPickable> parkAndPickables = new ArrayList<>();
+    private ParkAndPickableSorter sorter;
+
+    public ParkingManager() {}
+
+    public ParkingManager(ParkAndPickableSorter sorter) {
+        this.sorter = sorter;
+    }
 
     public Ticket parkCar(Car car) {
         if (!parkAndPickables.isEmpty()) {
@@ -22,5 +30,8 @@ public class ParkingManager {
 
     public void registerPickAndParkable(ParkAndPickable parkAndPickable) {
         parkAndPickables.add(parkAndPickable);
+        if (sorter != null) {
+            sorter.sortedParkAndPickable(parkAndPickables);
+        }
     }
 }
