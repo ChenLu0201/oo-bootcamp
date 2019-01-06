@@ -1,12 +1,12 @@
 package com.thoughworks.oobootcamp.parkinglot.domain;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 
 public class SmartParkingBoy extends ParkingBoy {
 
-    public SmartParkingBoy(ArrayList<ParkingLot> parkingLots) {
+    public SmartParkingBoy(List<ParkingLot> parkingLots) {
         super(parkingLots);
     }
 
