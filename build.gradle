@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id 'checkstyle'
-    id 'idea'
 }
 
 repositories {
@@ -13,6 +12,10 @@ dependencies {
     testCompile('com.google.guava:guava:r05')
     testCompile('org.junit.jupiter:junit-jupiter-params:5.3.2')
     testRuntime('org.junit.jupiter:junit-jupiter-engine:5.3.2')
+}
+
+checkstyle {
+    toolVersion = '6.1'
 }
 
 test {
