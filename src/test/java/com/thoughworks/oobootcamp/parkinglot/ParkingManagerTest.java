@@ -17,110 +17,117 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParkingManagerTest {
-    @Test
-    void should_return_ticket_when_park_car_given_manager_only_has_parking_lots() {
-        ParkingLot firstParkingLot = new ParkingLot(2);
-        ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkingManager parkingManager = new ParkingManager();
-        parkingManager.registerPickAndParkable(firstParkingLot);
-        parkingManager.registerPickAndParkable(secondParkingLot);
+  @Test
+  void should_return_ticket_when_park_car_given_manager_only_has_parking_lots() {
+    ParkingLot firstParkingLot = new ParkingLot(2);
+    ParkingLot secondParkingLot = new ParkingLot(2);
+    ParkingManager parkingManager = new ParkingManager();
+    parkingManager.registerPickAndParkable(firstParkingLot);
+    parkingManager.registerPickAndParkable(secondParkingLot);
 
-        Car myCar = new Car();
-        Ticket ticket = parkingManager.parkCar(myCar);
-        assertNotNull(ticket);
-        assertSame(myCar, firstParkingLot.pickCar(ticket));
-    }
+    Car myCar = new Car();
+    Ticket ticket = parkingManager.parkCar(myCar);
+    assertNotNull(ticket);
+    assertSame(myCar, firstParkingLot.pickCar(ticket));
+  }
 
-    @Test
-    void should_throw_exception_when_park_car_given_manager_only_has_full_parking_lots() {
-        ParkingLot firstParkingLot = new ParkingLot(2);
-        firstParkingLot.parkCar(new Car());
-        firstParkingLot.parkCar(new Car());
-        ParkingLot secondParkingLot = new ParkingLot(2);
-        secondParkingLot.parkCar(new Car());
-        secondParkingLot.parkCar(new Car());
-        ParkingManager parkingManager = new ParkingManager();
-        parkingManager.registerPickAndParkable(firstParkingLot);
-        parkingManager.registerPickAndParkable(secondParkingLot);
+  @Test
+  void should_throw_exception_when_park_car_given_manager_only_has_full_parking_lots() {
+    ParkingLot firstParkingLot = new ParkingLot(2);
+    firstParkingLot.parkCar(new Car());
+    firstParkingLot.parkCar(new Car());
+    ParkingLot secondParkingLot = new ParkingLot(2);
+    secondParkingLot.parkCar(new Car());
+    secondParkingLot.parkCar(new Car());
+    ParkingManager parkingManager = new ParkingManager();
+    parkingManager.registerPickAndParkable(firstParkingLot);
+    parkingManager.registerPickAndParkable(secondParkingLot);
 
-        assertThrows(NoSpaceException.class, () -> parkingManager.parkCar(new Car()));
-    }
+    assertThrows(NoSpaceException.class, () -> parkingManager.parkCar(new Car()));
+  }
 
-    @Test
-    void should_return_ticket_when_park_car_given_manager_has_one_parking_boy_and_parking_lots() {
-        ParkingLot firstParkingLot = new ParkingLot(2);
-        ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkingManager parkingManager = new ParkingManager();
-        ParkAndPickable parkingBoy= new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
-        ParkingLot parkingLot = new ParkingLot(2);
-        parkingManager.registerPickAndParkable(parkingBoy);
-        parkingManager.registerPickAndParkable(parkingLot);
-        Car myCar = new Car();
-        Ticket ticket = parkingManager.parkCar(myCar);
-        assertNotNull(ticket);
-        assertSame(myCar, firstParkingLot.pickCar(ticket));
-    }
+  @Test
+  void should_return_ticket_when_park_car_given_manager_has_one_parking_boy_and_parking_lots() {
+    ParkingLot firstParkingLot = new ParkingLot(2);
+    ParkingLot secondParkingLot = new ParkingLot(2);
+    ParkingManager parkingManager = new ParkingManager();
+    ParkAndPickable parkingBoy =
+        new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+    ParkingLot parkingLot = new ParkingLot(2);
+    parkingManager.registerPickAndParkable(parkingBoy);
+    parkingManager.registerPickAndParkable(parkingLot);
+    Car myCar = new Car();
+    Ticket ticket = parkingManager.parkCar(myCar);
+    assertNotNull(ticket);
+    assertSame(myCar, firstParkingLot.pickCar(ticket));
+  }
 
-    @Test
-    void should_park_by_boy_first_when_park_car_given_manager_has_one_parking_boy_and_parking_lots() {
-        ParkingManager parkingManager = new ParkingManager(new ParkingBoyFirstSorter());
-        ParkingLot firstParkingLot = new ParkingLot(2);
-        ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkAndPickable parkingBoy= new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+  @Test
+  void should_park_by_boy_first_when_park_car_given_manager_has_one_parking_boy_and_parking_lots() {
+    ParkingManager parkingManager = new ParkingManager(new ParkingBoyFirstSorter());
+    ParkingLot firstParkingLot = new ParkingLot(2);
+    ParkingLot secondParkingLot = new ParkingLot(2);
+    ParkAndPickable parkingBoy =
+        new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
 
-        ParkingLot parkingLot = new ParkingLot(2);
-        parkingManager.registerPickAndParkable(parkingLot);
-        parkingManager.registerPickAndParkable(parkingBoy);
+    ParkingLot parkingLot = new ParkingLot(2);
+    parkingManager.registerPickAndParkable(parkingLot);
+    parkingManager.registerPickAndParkable(parkingBoy);
 
-        Car myCar = new Car();
-        Ticket ticket = parkingManager.parkCar(myCar);
-        assertNotNull(ticket);
-        assertSame(myCar, firstParkingLot.pickCar(ticket));
-    }
+    Car myCar = new Car();
+    Ticket ticket = parkingManager.parkCar(myCar);
+    assertNotNull(ticket);
+    assertSame(myCar, firstParkingLot.pickCar(ticket));
+  }
 
-    @Test
-    void should_park_by_first_boy_when_park_car_given_manager_has_multiple_parking_boy() {
-        ParkingManager parkingManager = new ParkingManager(new ParkingBoyFirstSorter());
-        ParkingLot firstParkingLot = new ParkingLot(2);
-        ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkAndPickable parkingBoyA= new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+  @Test
+  void should_park_by_first_boy_when_park_car_given_manager_has_multiple_parking_boy() {
+    ParkingManager parkingManager = new ParkingManager(new ParkingBoyFirstSorter());
+    ParkingLot firstParkingLot = new ParkingLot(2);
+    ParkingLot secondParkingLot = new ParkingLot(2);
+    ParkAndPickable parkingBoyA =
+        new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
 
-        ParkingLot thirdParkingLot = new ParkingLot(2);
-        ParkingLot fourthParkingLot = new ParkingLot(2);
-        ParkAndPickable parkingBoyB= new SmartParkingBoy(newArrayList(thirdParkingLot, fourthParkingLot));
+    ParkingLot thirdParkingLot = new ParkingLot(2);
+    ParkingLot fourthParkingLot = new ParkingLot(2);
+    ParkAndPickable parkingBoyB =
+        new SmartParkingBoy(newArrayList(thirdParkingLot, fourthParkingLot));
 
-        ParkingLot parkingLot = new ParkingLot(2);
-        parkingManager.registerPickAndParkable(parkingLot);
-        parkingManager.registerPickAndParkable(parkingBoyB);
-        parkingManager.registerPickAndParkable(parkingBoyA);
+    ParkingLot parkingLot = new ParkingLot(2);
+    parkingManager.registerPickAndParkable(parkingLot);
+    parkingManager.registerPickAndParkable(parkingBoyB);
+    parkingManager.registerPickAndParkable(parkingBoyA);
 
-        Car myCar = new Car();
-        Ticket ticket = parkingManager.parkCar(myCar);
-        assertNotNull(ticket);
-        assertSame(myCar, thirdParkingLot.pickCar(ticket));
-    }
+    Car myCar = new Car();
+    Ticket ticket = parkingManager.parkCar(myCar);
+    assertNotNull(ticket);
+    assertSame(myCar, thirdParkingLot.pickCar(ticket));
+  }
 
-    @Test
-    void should_park_to_parking_lot_when_park_car_given_parking_lot_is_registered_into_parking_manager() {
-        ParkingManager parkingManager = new ParkingManager();
+  @Test
+  void
+      should_park_to_parking_lot_when_park_car_given_parking_lot_is_registered_into_parking_manager() {
+    ParkingManager parkingManager = new ParkingManager();
 
-        ParkingLot parkingLot = new ParkingLot(2);
-        parkingManager.registerPickAndParkable(parkingLot);
+    ParkingLot parkingLot = new ParkingLot(2);
+    parkingManager.registerPickAndParkable(parkingLot);
 
-        ParkingLot firstParkingLot = new ParkingLot(2);
-        ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkAndPickable parkingBoyA= new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+    ParkingLot firstParkingLot = new ParkingLot(2);
+    ParkingLot secondParkingLot = new ParkingLot(2);
+    ParkAndPickable parkingBoyA =
+        new CommonParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
 
-        ParkingLot thirdParkingLot = new ParkingLot(2);
-        ParkingLot fourthParkingLot = new ParkingLot(2);
-        ParkAndPickable parkingBoyB= new SmartParkingBoy(newArrayList(thirdParkingLot, fourthParkingLot));
+    ParkingLot thirdParkingLot = new ParkingLot(2);
+    ParkingLot fourthParkingLot = new ParkingLot(2);
+    ParkAndPickable parkingBoyB =
+        new SmartParkingBoy(newArrayList(thirdParkingLot, fourthParkingLot));
 
-        parkingManager.registerPickAndParkable(parkingBoyB);
-        parkingManager.registerPickAndParkable(parkingBoyA);
+    parkingManager.registerPickAndParkable(parkingBoyB);
+    parkingManager.registerPickAndParkable(parkingBoyA);
 
-        Car myCar = new Car();
-        Ticket ticket = parkingManager.parkCar(myCar);
-        assertNotNull(ticket);
-        assertSame(myCar, parkingLot.pickCar(ticket));
-    }
+    Car myCar = new Car();
+    Ticket ticket = parkingManager.parkCar(myCar);
+    assertNotNull(ticket);
+    assertSame(myCar, parkingLot.pickCar(ticket));
+  }
 }

@@ -1,8 +1,9 @@
 package length;
 
 public enum Unit {
-
-  KM(1000*1000), M(1000), MM(1);
+  KM(1000 * 1000),
+  M(1000),
+  MM(1);
 
   private int size;
 

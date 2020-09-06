@@ -1,7 +1,5 @@
 package length;
 
-import length.Length;
-import length.Unit;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,8 +27,6 @@ public class LengthTest {
   @Test
   void shouldReturn1WhenCompareGivenTargetKmAndBaseM() {
     Length length = new Length(1, Unit.M);
-    assertEquals(1,length.compare(new Length(1,Unit.KM)));
+    assertEquals(1, length.compare(new Length(1, Unit.KM)));
   }
-
-
 }

@@ -22,6 +22,5 @@ public class Length {
   public int compare(Length targetLength) {
 
     return Integer.compare(targetLength.getLength(), getLength());
-
   }
 }
